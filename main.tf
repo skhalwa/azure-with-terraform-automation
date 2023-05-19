@@ -159,8 +159,9 @@ resource "azurerm_virtual_machine" "main" {
 #     ]
 #   }
 # }
-resource "null_resource" "create_image" {
+resource "null_resource" "run_image_script" {
   provisioner "local-exec" {
-    command = "bash create_image.sh"
+    command = "bash ./create_image.sh"
+    interpreter = ["bash", "-c"]
   }
 }
