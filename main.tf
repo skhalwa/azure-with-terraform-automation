@@ -159,3 +159,8 @@ resource "azurerm_virtual_machine" "main" {
 #     ]
 #   }
 # }
+resource "null_resource" "create_image" {
+  provisioner "local-exec" {
+    command = "bash create_image.sh"
+  }
+}
