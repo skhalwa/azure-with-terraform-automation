@@ -159,9 +159,8 @@ resource "azurerm_virtual_machine" "main" {
 #     ]
 #   }
 # }
-resource "null_resource" "run_image_script" {
-  provisioner "local-exec" {
-    command = "bash ./create_image.sh"
-    interpreter = ["bash", "-c"]
+  provisioner "remote-exec" {
+    inline = [
+      "az snapshot create --name vm-vmss-snapshot --resource-group shubh-resources --vm-name shubh-vm --sku Standard_LRS"
+    ]
   }
-}
