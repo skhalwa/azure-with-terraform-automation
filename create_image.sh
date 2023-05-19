@@ -6,10 +6,12 @@ resource_group="shubh-resources"
 vm_name="shubh-vm"
 snapshot_sku="Standard_LRS"
 
+disk_id=$(az vm show --name "$vm_name" --resource-group "$resource_group" --query "storageProfile.osDisk.managedDisk.id" --output tsv)
+
 az snapshot create \
   --name "$snapshot_name" \
   --resource-group "$resource_group" \
-  --vm-name "$vm_name" \
+  --source "$disk_id" \
   --sku "$snapshot_sku"
 
 # Create an image from the snapshot
