@@ -6,7 +6,7 @@ resource_group="shubh-resources"
 vm_name="shubh-vm"
 snapshot_sku="Standard_LRS"
 
-az vm disk create \
+az snapshot create \
   --name "$snapshot_name" \
   --resource-group "$resource_group" \
   --vm-name "$vm_name" \
