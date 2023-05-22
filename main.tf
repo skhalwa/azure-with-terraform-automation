@@ -159,8 +159,10 @@ resource "azurerm_virtual_machine" "main" {
 #     ]
 #   }
 # }
-  provisioner "remote-exec" {
-    inline = [
-      "az snapshot create --name vm-vmss-snapshot --resource-group shubh-resources --vm-name shubh-vm --sku Standard_LRS"
-    ]
-  }
+resource "azurerm_snapshot" "example" {
+  name                = "snapshot"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  create_option       = "Copy"
+  source_uri          = azurerm_managed_disk.myosdisk1.id
+}
